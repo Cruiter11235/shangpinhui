@@ -1,6 +1,5 @@
 <template>
   <div>
-    Home
   </div>
 </template>
 
@@ -10,6 +9,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less">
 </style>

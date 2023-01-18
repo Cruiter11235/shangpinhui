@@ -6,6 +6,15 @@ import Login from '@/components/pages/Login';
 import Register from '@/components/pages/Register';
 import Search from '@/components/pages/Search';
 
+let OriPush = VueRouter.prototype.push;
+
+VueRouter.prototype.push = function(location,resolve,reject){
+    if(resolve && reject){
+        OriPush.call(this,location,resolve,reject); 
+    }else{
+        OriPush.call(this,location,()=>{},()=>{});
+    }
+}
 Vue.use(VueRouter);
 
 
@@ -29,8 +38,16 @@ export default new VueRouter({
         },
         {
             name:'Search',
-            path:'/Search',
+            path:'/Search/:item?',
             component:Search,
+            props({params:{item}}){
+                return {item};
+            }
+        },
+        //重定向
+        {
+            path:'*',
+            redirect:'/Home'
         }
     ]
 })
